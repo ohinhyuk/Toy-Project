@@ -1,13 +1,15 @@
 #quote span{
+    display: flex;
     font-size: 20px;
     text-align:center;
     display: block;
-    color: white;
+    color: lightyellow;
     font-weight: bold;
     padding: 10px;
+    
 }
 
 #quote{
-    padding-top: 10%;
+    padding-top: 10px;
 }
 

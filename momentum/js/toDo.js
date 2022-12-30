@@ -21,14 +21,17 @@ function saveToDo(toDos){
 function inputElementInUl(newToDoObj){
     const li = document.createElement("li");
     li.id = newToDoObj.id;
-    const span = document.createElement("span");
-    span.innerText = newToDoObj.text;
-    li.appendChild(span);
     const button = document.createElement("button");
-    button.innerText = "Delete";
+    button.innerText = "✗";
+    button.id = "btn";
     button.type = "button";
     li.appendChild(button);
     button.addEventListener("click",handleDelete);
+    
+    const span = document.createElement("span");
+    span.innerText = newToDoObj.text;
+    li.appendChild(span);
+    
     ul_toDo.appendChild(li);
     toDos.push(newToDoObj);
     saveToDo(toDos);
