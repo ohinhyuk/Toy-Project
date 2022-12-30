@@ -14,7 +14,7 @@ function handleFormSubmit(event){
     localStorage.setItem(USER_NAME,newName);
     formInput.classList.add(HIDDEN);
 
-    formName.innerText = newName;
+    formName.innerText =`Hello ${newName}`;
     formName.classList.remove(HIDDEN);    
 
 }
@@ -23,7 +23,7 @@ if(savedName === null){
     formInput.classList.remove(HIDDEN);
 }
 else{
-    formName.innerText = savedName;
+    formName.innerText = `Hello ${savedName}`;
     formName.classList.remove(HIDDEN);
 }
 
