@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.querySelector("#root");
+    function Min2hour(){
+
+        const [amount , setMin] = React.useState(60);
+        const [filp , setFilp] = React.useState(false);
+
+        const onChange = (event) => {
+            setMin(event.target.value);
+        }
+        const onClick = () => setMin(0);
+       
+        const onFilp = () =>{
+            onClick();
+            setFilp((current)=>!current);
+        }
+
+        return(
+            <div>
+                <h2>Converter</h2>
+                <label htmlFor="minetes">Minetes</label>
+                <input id="minetes" type="number" placeholder="Minetes" value={filp ? amount*60 : amount} onChange={onChange} disabled={filp}/>
+                <label htmlFor="hours">Hours</label>
+                <input id="hours" type="number" placeholder="Hours" value= {!filp ? Math.round(amount/60) : amount} onChange={onChange} disabled={!filp} />
+                <button onClick={onClick}>Reset</button>
+                <button onClick={onFilp}>Filp</button>
+            </div>
+        );
+    }
+    function Km_2_miles(){
+
+        const [amout , setAmount] = React.useState();
+        const [filp , setFilp] = React.useState(false);
+
+        function onChange(event){
+            setAmount(event.target.value);
+        }
+
+        function onClick(){
+            resetNum();
+            setFilp((current) => !current);
+
+            console.log(filp);
+            
+        }
+
+        function resetNum(){
+            setAmount(0);
+        }
+
+        return(
+            <div>
+                <h3>Km Converter</h3>
+                
+                <label htmlFor="km" >Km</label>
+                <input id="km" type="number" value={filp ? amout * 1.60934 : amout} onChange={onChange} disabled={filp}/>
+                <label htmlFor="mile">Miles</label>
+                <input id="mile" type="number" value={!filp ? amout * 0.621371 : amout} onChange={onChange} disabled={!filp}/>
+                <button onClick={resetNum}>Reset</button>
+                <button onClick={onClick}>Flip</button>    
+            </div>
+        );
+    }
+    function Div(){
+        
+        const [index , setIndex] = React.useState("0");
+
+        const onChange = (event) => {
+            setIndex(event.target.value);
+            console.log(event.target.value);
+        }
+        
+        return(
+            <div>
+                <select value={index} onChange={onChange}> 
+                    <option value="0"> Minute_2_Hours</option>
+                    <option value="1"> Km_2_Miles</option>
+                </select>
+                { index === "0" ? <Min2hour /> : null }
+                { index === "1" ? <Km_2_miles /> : null }
+            </div>
+        );
+    }
+    
+    ReactDOM.render(<Div />,root);
+    
+    
+</script>
+</html>
