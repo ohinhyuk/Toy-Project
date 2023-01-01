@@ -9,15 +9,20 @@
 <body>
     <div id="root"></div>
 </body>
-<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<!-- <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script> -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script type="text/babel">
-    const root = document.querySelector("#root");
-    function Btn({ text , big }) {
 
+
+    const root = document.querySelector("#root");
+    function Btn({ text , big , onClick }) {
+        console.log({text} , "Boom");
         return (
             <button 
+            onClick={onClick}
             style={{
                 backgroundColor: "tomato",
                 color: "white",
@@ -32,11 +37,24 @@
         );
     }
 
+    
+    Btn.propTypes = {
+        text: PropTypes.string,
+        big: PropTypes.bool,
+    };
+    
     function Div(){
+
+        const [value , setValue] = React.useState("Hello");
+        
+        const onClick = () => {
+            setValue("Booya");
+        }
+
         return(
             <div>
-                <Btn text="Hello" big={false} />
-                <Btn text="World" big={true} />
+                <Btn text={value} big={false} onClick={onClick} />
+                <Btn  big={true} />
             </div>
         );
     }
