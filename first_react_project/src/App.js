@@ -3,37 +3,39 @@ import Button from "./Button";
 
 function App() {
 
-  const [counter , setCounter] = useState(0);
-  const [text , setText] = useState("");
-
-  const onClick = () => {
-    setCounter(prev => prev+1);
-  }
+  const [value,setValue] = useState("");
+  const [toDos , setToDos] = useState([]);
 
   const onChange = (event) =>{
-    setText(event.target.value);
+    setValue(event.target.value);
+  }
+  const onSubmit = (event) =>{
+    event.preventDefault();
+    if(value !== ""){
+      setToDos(currentToDos => [ value, ...currentToDos]);  
+      setValue("");
+    }
   }
 
-  console.log("all time");
-
-  useEffect(() =>{
-    console.log("once time");
-  } , [])
-
-  useEffect(() => {
-    console.log("counter time");
-  } , [counter])
-
-  useEffect(()=>{
-    if(text.length > 5)
-    console.log("text time");
-  } , [text])
-
+  const handleDelete = (idx) => {
+    // const li = event.target.parentElement;
+    // console.log(li);
+    setToDos(prev => prev.filter((item,index) => index !== idx ));
+    
+  }
+  // console.log(toDos);
+  useEffect(()=>console.log(toDos),[toDos]);
   return (
     <div>
-      <h1>Welcome back!{counter}</h1>
-      <input type="text" onChange={onChange}/>
-      <Button onClick={onClick} text={"Button!"} />
+      <form onSubmit={onSubmit}>
+      <input onChange={onChange} value={value} placeholder="please enter your toDo" />
+      <button>Submit</button>
+      </form>
+      <ul>
+        {toDos.map((item,index) => (
+          <li key={index}>{item}<button onClick={ () => handleDelete(index)}>X</button></li>
+          ))}
+      </ul>
     </div>
 
   );
