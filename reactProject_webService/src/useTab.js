@@ -1,4 +1,4 @@
-const useTabs = (initialValue, allTabs) => {
+export const useTabs = (initialValue, allTabs) => {
     const [currentIndex , setCurrentIndex] = useState(initialValue);
     if(!allTabs || !Array.isArray(allTabs)){
       return;
