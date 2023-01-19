@@ -15,13 +15,10 @@ function App() {
     else{
       setIsLoggedIn(false);
     }
-    console.log("This");
-    console.log(init);
     setInit(true);
     
     })
   } , []);
-  console.log(init);
 
   return (
     <>
