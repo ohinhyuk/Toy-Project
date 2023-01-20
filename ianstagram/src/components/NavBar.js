@@ -168,7 +168,7 @@ function NavBar() {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="fixed" sx={{boxShadow:2}}>
         <Toolbar sx={{
           display: 'flex',
           justifyContent: 'space-evenly',
@@ -178,17 +178,18 @@ function NavBar() {
           <Typography
             variant="h6"
             noWrap
-            component="div"
+            // component="div"
             sx={{ display: { xs: 'none', sm: 'block' } , color : 'black' }}
             
           >
              Instagram
           </Typography>
-          <Search>
+          <Search sx={{ mr:-8}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+            sx={{width:"350px"}}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
@@ -253,7 +254,9 @@ function NavBar() {
               <Link to="/profile"><AccountCircle /></Link>
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+
+            {/* 반응형 */}
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"

@@ -7,12 +7,26 @@ import Profile from "../routes/profile/Profile";
 import Story from "../routes/story/Story";
 import Footer from "./Footer";
 import Header from "./Header";
+import { createTheme , ThemeProvider } from "@mui/material";
+import { fontSize } from "@mui/system";
+// import { ThemeProvider } from "@emotion/react";
+
+const headerTheme = createTheme({
+    typography: {
+        fontFamily: "'Dancing Script', cursive",
+        fontSize : 15,
+    },
+    
+    
+})
 
 const AppRouter = () =>{
 
     return(
         <Router>
-            <Header />
+            <ThemeProvider theme={headerTheme}>
+                <Header />
+            </ThemeProvider>
             <Routes>
                 <>
                 <Route path="/" element={<Home />}/>
