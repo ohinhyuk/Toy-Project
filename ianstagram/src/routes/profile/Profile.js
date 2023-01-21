@@ -8,9 +8,24 @@ import RememberMeIcon from '@mui/icons-material/RememberMe';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React from "react";
 
+import { createTheme , ThemeProvider } from "@mui/material";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+const headerTheme = createTheme({
+    typography: {
+        fontFamily: "'Dancing Script', cursive",
+        fontSize : 15,
+    },
+})
+
 function Profile(){
 
     return(
+        <Box>
+            <ThemeProvider theme={headerTheme}>
+                <Header />
+                </ThemeProvider>
         <Grid container spacing={2} sx={{width:"80%" , margin:"Auto" , my: 10}}>
             <Box
                 sx={{
@@ -82,6 +97,8 @@ function Profile(){
                 </Box>
             </Grid>
         </Grid>
+        <Footer />
+        </Box>
     );
 }
 

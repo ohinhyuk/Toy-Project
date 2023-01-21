@@ -11,32 +11,33 @@ import { createTheme , ThemeProvider } from "@mui/material";
 import { fontSize } from "@mui/system";
 // import { ThemeProvider } from "@emotion/react";
 
-const headerTheme = createTheme({
-    typography: {
-        fontFamily: "'Dancing Script', cursive",
-        fontSize : 15,
-    },
-    
-    
-})
+// const headerTheme = createTheme({
+//     typography: {
+//         fontFamily: "'Dancing Script', cursive",
+//         fontSize : 15,
+//     },
+// })
 
 const AppRouter = () =>{
-
+    
     return(
         <Router>
-            <ThemeProvider theme={headerTheme}>
+{/* 
+           <ThemeProvider theme={headerTheme}>
                 <Header />
-            </ThemeProvider>
+                </ThemeProvider> */}
             <Routes>
                 <>
+                
                 <Route path="/" element={<Home />}/>
                 <Route path="/message" element={<Message />}/>
                 <Route path="/profile" element={<Profile />}/>
                 <Route path="/story" element={<Story />}/>
                 <Route path="/detail" element={<Detail />}/>
                 </>
+               
             </Routes>
-            <Footer />
+            {/* <Footer /> */}
         </Router>
     );
 

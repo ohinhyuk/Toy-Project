@@ -201,21 +201,21 @@ function NavBar() {
             {/* story */}
             <IconButton size="large" color="black">
             <Badge badgeContent={4} color="error">
-            <Link to="/story"><AddCircleOutlineOutlinedIcon /></Link>
+            <Link to="../story"><AddCircleOutlineOutlinedIcon /></Link>
             </Badge>
             </IconButton>
 
             {/* home */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
               <Badge badgeContent={4} color="error">
-                <Link to="/"><HomeOutlinedIcon /></Link>
+                <Link to="../"><HomeOutlinedIcon /></Link>
               </Badge>
             </IconButton>
 
             {/* message */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
               <Badge badgeContent={4} color="error">
-                <Link to="message"><SendOutlinedIcon /></Link>
+                <Link to="../message"><SendOutlinedIcon /></Link>
               </Badge>
             </IconButton>
 
@@ -237,7 +237,7 @@ function NavBar() {
               color="black"
             >
               <Badge badgeContent={17} color="error">
-              <Link to="/detail"><ZoomInOutlinedIcon /></Link>
+              <Link to="../detail"><ZoomInOutlinedIcon /></Link>
               </Badge>
               </IconButton>
             
@@ -251,7 +251,7 @@ function NavBar() {
               onClick={handleProfileMenuOpen}
               color="black"
             >
-              <Link to="/profile"><AccountCircle /></Link>
+              <Link to="../profile"><AccountCircle /></Link>
             </IconButton>
           </Box>
 

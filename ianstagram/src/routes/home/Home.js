@@ -1,7 +1,18 @@
 import { makeStyles } from "@material-ui/core";
 import { Box, Grid, Paper } from "@mui/material";
-import { createTheme, display, ThemeProvider } from "@mui/system";
 import React from "react";
+
+import { createTheme , ThemeProvider } from "@mui/material";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+const headerTheme = createTheme({
+    typography: {
+        fontFamily: "'Dancing Script', cursive",
+        fontSize : 15,
+    },
+})
+
 const gridStyles = makeStyles((theme) => ({
     root: {
         // padding: theme.spacing(1),
@@ -27,6 +38,11 @@ function Home(){
     const classes = gridStyles();    
     
     return(
+        <Box>
+            <ThemeProvider theme={headerTheme}>
+                <Header />
+                </ThemeProvider>
+        
         
         <Box component="div"  sx={{
             display: "grid",
@@ -42,8 +58,9 @@ function Home(){
                 <Paper elevation={3} sx={{ gridArea: 'sidebar',maxHeight:"300px", mt: 20}}>
                 </Paper>
         </Box>
-        
-        
+            
+            <Footer />
+        </Box>
     );
 }
 
