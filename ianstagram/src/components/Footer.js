@@ -8,7 +8,7 @@ function Footer(){
             <Box sx={{ display: 'flex',
           justifyContent: 'space-evenly',
           fontSize: "5px",
-          width: "30%",
+          width: {md:"40%" , xs: "80%"},
           margin:"Auto",
         mt: "30px"}}
           color="text.secondary">
@@ -26,7 +26,7 @@ function Footer(){
             <Box sx={{ display: 'flex',
           justifyContent: 'space-evenly',
           fontSize: "10px",
-          width: "30%",
+          width: "50%",
           margin:"Auto",
           my: "10px",
           }}

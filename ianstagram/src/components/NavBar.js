@@ -182,7 +182,7 @@ function NavBar() {
             sx={{ display: { xs: 'none', sm: 'block' } , color : 'black' }}
             
           >
-             Instagram
+             Ianstagram
           </Typography>
           <Search sx={{ mr:-8}}>
             <SearchIconWrapper>

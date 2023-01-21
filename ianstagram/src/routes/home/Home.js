@@ -32,30 +32,14 @@ function Home(){
             display: "grid",
             gap: "3rem",
             width:"60%",
-            margin: "auto",
-            
-            // gridTemplateAreas: `"story sidebar"
-            //                     "main sidebar"`,
-            // gridTemplateColumns: "minmax(0,2fr) minmax(0,1fr)"                 
+            margin: "auto",            
            }}
            className={classes.root}>
-                
-                
-                
                 <Paper elevation={3} sx={{ gridArea : 'story' ,  height:"100px" , mt:15 }}>
-
-
                 </Paper>
-                
-                
                 <Paper elevation={3} sx={{ gridArea: 'main'  , height:"2500px"}}>
-
-
-                </Paper>
-                
-
+                </Paper>            
                 <Paper elevation={3} sx={{ gridArea: 'sidebar',maxHeight:"300px", mt: 20}}>
-
                 </Paper>
         </Box>
         
