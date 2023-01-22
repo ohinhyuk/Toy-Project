@@ -139,7 +139,7 @@ function Home(){
         
         <Box component="div"  sx={{
             display: "grid",
-            gap: "3rem",
+            gap: "2rem",
             width:"60%",
             margin: "auto",            
            }}
@@ -152,6 +152,8 @@ function Home(){
                          </Box>
                     ))}
                 </Paper>
+
+        {/* pid */}
                 <Box elevation={3} sx={{ gridArea: 'main' }}>
                     {pids.map(( pid , index) => ( 
                     <Paper elevation={3} key={index} sx={{mb:5}}>
@@ -161,7 +163,11 @@ function Home(){
                         <ListIcon sx={{marginLeft:'auto' , mt: 3 , mr:2}}/>
                         </Box>
                         <Box>
-                            <img src={pid.pidImage[0]} width="100%" />
+                        <Box  sx={{display: 'flex', flexDirection: 'row', whiteSpace:'nowrap', overflowX: 'auto'}}>{pid.pidImage.map( (image , index) => (
+                                <img key={index} src={image} width="100%" />
+                            
+                            ))}
+                        </Box>
                         </Box>
                         <Box sx={{display : "flex" , flexDirection:'row' ,justifyContent:'start' }}>
                             <FavoriteBorderIcon sx={{mx : 1 , my: 0.5}}/>
