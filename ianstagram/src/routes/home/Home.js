@@ -11,6 +11,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SendIcon from '@mui/icons-material/Send';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import { grid } from "@mui/system";
 
 const headerTheme = createTheme({
     typography: {
@@ -35,7 +36,7 @@ const gridStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]:{
             gridTemplateAreas: `"story sidebar"
                             "main sidebar"`,
-            gridTemplateColumns: "minmax(0,2fr) minmax(0,1fr)"  
+            gridTemplateColumns: "minmax(0,2fr) minmax(0,1.3fr)"  
         },
     }
 }));
@@ -126,6 +127,35 @@ function Home(){
     setPidsLoading(true);
     }, [])
 
+    // user
+
+    const user = {
+        id : "Inhyuk_52",
+        name : "오인혁",
+    }
+
+    const recommendation = [{
+      name : 'kimyuhyuk0406',
+      image : 'img/newjeans1.png',
+    },
+    {
+        name : 'min_zzi',
+        image : 'img/newjeans2.png',
+    },
+    {
+    name : 'hello_world',
+    image : 'img/newjeans3.png',
+    },
+    {
+    name : 'hello_ianstagram',
+    image : 'img/newjeans4.png',
+    },
+    {
+    name : 'minsu_0908',
+    image : 'img/newjeans5.png',
+    },
+]
+
 
     const classes = gridStyles();    
     
@@ -206,8 +236,41 @@ function Home(){
                     )
                     )}
                 </Box>            
-                <Paper elevation={3} sx={{ gridArea: 'sidebar',maxHeight:"300px", mt: 20}}>
-                </Paper>
+
+                {/* sidebar */}
+                <Box sx={{ gridArea: 'sidebar',maxHeight:"300px", mt: 15, ml:2 , display: { md:'grid' , xs:'none'} }}>
+                    <Box sx={{ display: 'flex' , alignItems:'center'}}>
+                        <Box sx={{border:0 , borderRadius:"50%", width:"60px" ,height:"60px" , overflow:'hidden'}}>
+                                    <img src="img/inhyuk.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                        </Box>
+                        <Box sx={{ml : 2}}>
+                            <Typography variant="body2"><strong>{user.id}</strong></Typography>
+                            <Typography variant="body2" sx={{ color:'gray'}}>{user.name}</Typography>
+                        </Box>
+                        <Button sx={{marginLeft:'auto'}}>전환</Button>
+                    </Box>
+                    <Box sx={{my:2 , display: 'flex' , alignItems:'center'}}>
+                    <Typography variant="body2" sx={{ color:'gray' , opacity:"0.7"}}><strong>회원님을 위한 추천</strong></Typography>
+                    <Button sx={{color: 'black', marginLeft : 'auto' , fontSize:'13px'}}>모두 보기</Button>
+                    </Box>
+                    
+                    {recommendation.map( (person , index) => (
+                        <Box key={index} sx={{ display: 'flex' , mb:1}}>
+                            <Box sx={{mr:1 ,border: 0 , borderRadius:'50%' , width:'40px' , height:'40px' ,overflow:'hidden'}}>
+                                <img src={person.image} width="100%" height="100%" style={{objectFit:'cover'}}/>
+                            </Box>
+                            <Box>
+                                <Typography variant="body2"><strong>{person.name}</strong></Typography>
+                                <Typography variant="caption" sx={{color:'gray' , opacity:'0.7'}}>danpparkk님 외 2명이 팔로우합니다</Typography>
+                            </Box>
+                            <Button sx={{marginLeft:'auto'}}>팔로우</Button>
+
+                            
+                        </Box>
+                    ))}
+
+                </Box>
+
         </Box>
             
             <Footer />

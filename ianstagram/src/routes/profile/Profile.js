@@ -33,7 +33,9 @@ function Profile(){
                 justifyContent: 'center',
                 }}
             >
-                <Box id="profile-leftBox-photo" sx={{ width: 150 , height: 150, border: 1 ,borderRadius:"50%" , mx : { md:10} , mr: {md:10 ,xs:2} ,my:2}}></Box>
+                <Box id="profile-leftBox-photo" sx={{ width: 150 , height: 150, border: 1 ,borderRadius:"50%" , mx : { md:10} , mr: {md:10 ,xs:2} ,my:2 , overflow:'hidden'}}>
+                    <img src="img/inhyuk.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                </Box>
                 <Box id="profile-rightBox">
                     <Box id="profile-englishName" sx={{
                     display: 'flex',
@@ -65,19 +67,27 @@ function Profile(){
                     p: 2
                     }}>
                         <Box id="story-1" sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <Box sx={{border:1 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"} ,mx: {md: 3 , xs:1 ,} }}></Box>
+                            <Box sx={{border:0 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"} ,mx: {md: 3 , xs:1} , overflow:'hidden'}}>
+                            <img src="img/p1.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                            </Box>
                             <Typography variant="caption" sx={{py:1,fontWeight:"bold", textAlign:'center'}}>22-2</Typography>    
                         </Box>
                         <Box id="story-1" sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <Box sx={{border:1 , borderRadius:"50%" ,width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}}}></Box>
+                            <Box sx={{border:0 , borderRadius:"50%" ,width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}, overflow:'hidden'}}>
+                            <img src="img/p2.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                            </Box>
                             <Typography variant="caption" sx={{py:1,fontWeight:"bold", textAlign:'center'}}>22-1</Typography>    
                         </Box>
                         <Box id="story-1" sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <Box sx={{border:1 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}}}></Box>
+                            <Box sx={{border:0 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}, overflow:'hidden'}}>
+                            <img src="img/p3.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                            </Box>
                             <Typography variant="caption" sx={{py:1,fontWeight:"bold", textAlign:'center'}}>민지</Typography>    
                         </Box>
                         <Box id="story-1" sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <Box sx={{border:1 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}}}></Box>
+                            <Box sx={{border:0 , borderRadius:"50%" , width: { md:"80px" , xs:"50px"} , height:{ md:"80px" , xs:"50px"}  ,mx: {md: 3 , xs:1}, overflow:'hidden'}}>
+                            <img src="img/lion1.png" width="100%" height="100%" style={{objectFit:'cover'}}/>
+                            </Box>
                             <Typography variant="caption" sx={{py:1,fontWeight:"bold", textAlign:'center'}}>운동</Typography>    
                         </Box>
             </Box>
