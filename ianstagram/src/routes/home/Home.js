@@ -51,31 +51,38 @@ function Home(){
         setStories([
             {
                 name : "hk_is_hakyoung",
-                image : "img/calvin.png"
+                image : "img/calvin.png",
+                storyImage : "img/story1.png"
             },
             {
                 name : "yeOng.jo",
-                image : "img/github.png"
+                image : "img/github.png",
+                storyImage : "img/story2.png"
             },
             {
                 name : "smallest_ju",
-                image : "img/instagram.png"
+                image : "img/instagram.png",
+                storyImage : "img/story3.png"
             },
             {
                 name : "0310_jhn",
-                image : "img/kakao.png"
+                image : "img/kakao.png",
+                storyImage : "img/story4.png"
             },
             {
                 name : "kang.garam",
-                image : "img/kangol.png"
+                image : "img/kangol.png",
+                storyImage : "img/story5.png"
             },
             {
                 name : "issac_kim",
-                image : "img/lacoste.png"
+                image : "img/lacoste.png",
+                storyImage : "img/story6.png"
             },
             {
                 name : "hyodo_hee",
-                image : "img/react.png"
+                image : "img/react.png",
+                storyImage : "img/story1.png"
             }
         ]);
         setStoryLoading(true);
@@ -166,7 +173,7 @@ function Home(){
                 <Header />
                 </ThemeProvider>
         
-        
+        {/* story */}
         <Box component="div"  sx={{
             display: "grid",
             gap: "2rem",
@@ -176,10 +183,19 @@ function Home(){
            className={classes.root}>
                 <Paper elevation={3} sx={{ gridArea : 'story' ,  height:"110px" , mt:10 , display: 'flex', flexDirection: 'row', whiteSpace:'nowrap', overflowX: 'auto' }}>
                     {stories.map( (story, index) => (
+                        
                         <Box key={index} sx={{ border : 0 , width : "300px" , marginY:'auto', mx:1 , marginY:'auto'}}>
+                            <Link key={index} to="../story" style={{textDecoration: 'none', color: 'none'}} state={{
+                            name: story.name,
+                            image: story.image,
+                            storyImage: story.storyImage
+                        }}>
                             <Box sx={{width:"52px" , height:"52px" , p:0.2,border:2, borderColor:'#FF007F' , borderRadius:"50%" , marginX:'auto' }}><Box sx={{ width:"50px" , height:"50px" ,border:0 , borderRadius: "100%" , overflow:'hidden', marginX:'auto'}}><img src={story.image}  width="100%" height="100%" style={{objectFit:"cover"}} /></Box></Box>
                             <Typography variant="caption" sx={{textAlign:'center'}}>{story.name.length > 8 ? story.name.slice(0,8) + "..." : story.name}</Typography>
+                            </Link>
                          </Box>
+
+                         
                     ))}
                 </Paper>
 

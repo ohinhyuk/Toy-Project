@@ -201,26 +201,26 @@ function NavBar() {
             {/* story */}
             <IconButton size="large" color="black">
             <Badge badgeContent={4} color="error">
-            <Link to="../story"><AddCircleOutlineOutlinedIcon /></Link>
+            <Link to="../story" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><AddCircleOutlineOutlinedIcon /></Link>
             </Badge>
             </IconButton>
 
             {/* home */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
               <Badge badgeContent={4} color="error">
-                <Link to="../"><HomeOutlinedIcon /></Link>
+                <Link to="../" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><HomeOutlinedIcon /></Link>
               </Badge>
             </IconButton>
 
             {/* message */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
               <Badge badgeContent={4} color="error">
-                <Link to="../message"><SendOutlinedIcon /></Link>
+                <Link to="../message" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><SendOutlinedIcon /></Link>
               </Badge>
             </IconButton>
 
             {/* alarm */}
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="black"
@@ -228,18 +228,18 @@ function NavBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
 
             {/* detail */}
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="black"
             >
               <Badge badgeContent={17} color="error">
-              <Link to="../detail"><ZoomInOutlinedIcon /></Link>
+              <Link to="../detail" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><ZoomInOutlinedIcon /></Link>
               </Badge>
-              </IconButton>
+              </IconButton> */}
             
             {/* profile */}
             <IconButton
@@ -251,7 +251,7 @@ function NavBar() {
               onClick={handleProfileMenuOpen}
               color="black"
             >
-              <Link to="../profile"><AccountCircle /></Link>
+              <Link to="../profile" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><AccountCircle /></Link>
             </IconButton>
           </Box>
 
