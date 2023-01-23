@@ -199,22 +199,22 @@ function NavBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
     
             {/* story */}
-            <IconButton size="large" color="black">
+            {/* <IconButton size="large" color="black">
             <Badge badgeContent={4} color="error">
             <Link to="../story" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><AddCircleOutlineOutlinedIcon /></Link>
             </Badge>
-            </IconButton>
+            </IconButton> */}
 
             {/* home */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
-              <Badge badgeContent={4} color="error">
+              {/* <Badge badgeContent={4} color="error"> */}
                 <Link to="../" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><HomeOutlinedIcon /></Link>
-              </Badge>
+              {/* </Badge> */}
             </IconButton>
 
             {/* message */}
             <IconButton size="large" aria-label="show 4 new mails" color="black">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={4} color="secondary">
                 <Link to="../message" style={{textDecoration: 'inherit' , color: 'secondary.main'}}><SendOutlinedIcon /></Link>
               </Badge>
             </IconButton>
@@ -262,10 +262,10 @@ function NavBar() {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              // onClick={handleMobileMenuOpen}
               color="black"
             >
-              <MoreIcon />
+              {/* <MoreIcon /> */}
             </IconButton>
           </Box>
           </Stack>
