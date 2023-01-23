@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import { createTheme , ThemeProvider } from "@mui/material";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -186,7 +186,16 @@ function Home(){
         {/* pid */}
                 <Box elevation={3} sx={{ gridArea: 'main' }}>
                     {pids.map(( pid , index) => ( 
-                    <Paper elevation={3} key={index} sx={{mb:5}}>
+                        <Link key={index} to="../detail" style={{textDecoration: 'none', color: 'none'}} state={{
+                            name: pid.name,
+                            userImage : pid.userImage,
+                            pidImage: pid.pidImage,
+                            content: pid.content 
+                         }}>
+                    <Paper elevation={3} sx={{mb:5}}>
+
+                    
+                        
                         <Box sx={{display: "flex", flexDirection:'row' ,border:0 , width:"100%" , justifyContent:'start'}}>
                         <Box sx={{width:"35px", height: "35px",border:0, borderRadius: "50%", overflow: "hidden", m:2}}><img src={pid.userImage} width="100%" height="100%" style={{objectFit:"cover"}} /></Box>
                         <Typography variant="caption" sx={{ fontWeight:'bold',marginY:'auto'}}>{pid.name}</Typography>
@@ -221,7 +230,7 @@ function Home(){
                         <Box sx={{mt:1}}>
                             <Typography variant="caption" color="gray" sx={{opacity:'0.6' , ml:2 , fontSize:"5px"}}> 3시간 전 </Typography>
                         </Box>
-                        <hr style={{opacity:'0.5'}}/>
+                        <hr style={{color:'#d3d3d3', opacity:'0.3'}}/>
                         <Box sx={{display:"flex" , alignItems:'center'}}>
                             <SentimentSatisfiedAltIcon sx={{ mx: 1}}/>
                             <Typography variant="body2" color="gray" sx={{opacity:'0.8'}}>
@@ -231,8 +240,10 @@ function Home(){
                         </Box>
                         
                         </Box>
+                        
                     </Paper>
-
+                        
+                    </Link>
                     )
                     )}
                 </Box>            
