@@ -2,6 +2,8 @@ import { Box, createTheme, Input, TextField, ThemeProvider, Typography } from "@
 import { borderRadius } from "@mui/system";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import SendIcon from '@mui/icons-material/Send';
 
 const headerTheme = createTheme({
     typography: {
@@ -28,7 +30,10 @@ function Story(){
 
         <Box>
             <ThemeProvider theme={headerTheme}>
+                <Box sx={{display:'flex' , alignItems:'center'}}>
             <Typography variant="h6" sx={{color:"white" , pl : 2}}>Ianstagram</Typography>
+            <a href="../" style={{marginLeft:'auto'}}><CloseOutlinedIcon sx={{color:'white'}}/></a>
+            </Box>
             </ThemeProvider>
 
             <Box sx={{ width:"30%" , height:"90vh" , margin:"auto" , border:0 , backgroundColor:'lightCoral' ,display:'flex' , flexDirection:'column' , backgroundImage:`url(${story.storyImage})` , backgroundRepeat:'no-repeat' , backgroundSize:'cover',backgroundPosition:'center'}}>
@@ -39,25 +44,29 @@ function Story(){
                         
                     </Box>
                     <Typography variant="body2" sx={{ml:1, color:'white'}}>{story.name}</Typography>
-                    <Typography variant="body2" sx={{ml:1, color:'gray'}}>1시간</Typography>
+                    <Typography variant="body2" sx={{ml:1, color:'white'}}>1시간</Typography>
                 </Box>
-
-                <TextField
-                    defaultValue={def}
-                    color="secondary"
-                    focused
-                    size="small"
-                    sx={{
-                        ' .MuiOutlinedInput-root': {
-                        color: 'white',
-                        fontSize:'small',
-                        borderRadius:"20px"
-                        },
-                        width:'80%',
-                        marginTop:'auto',
-                        p:2,
-                    }}
-                />
+                <Box sx={{display : 'flex' , alignItems:'center' ,
+                            
+                            width:'95%',marginTop:'auto',}}>
+                    <TextField
+                        defaultValue={def}
+                        // color=""
+                        focused
+                        size="small"
+                        sx={{
+                            ' .MuiOutlinedInput-root': {
+                            color: 'white',
+                            fontSize:'small',
+                            borderRadius:"20px"
+                            },
+                            width:'100%',
+                            marginTop:'auto',
+                            p:2,
+                        }}
+                    />
+                    <SendIcon  sx={{marginLeft:'auto',color:'white'}}/>
+                </Box>
             </Box>
 
             
