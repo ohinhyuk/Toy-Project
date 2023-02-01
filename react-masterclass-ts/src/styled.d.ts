@@ -1,10 +1,10 @@
-import 'styled-components';
+import "styled-components";
 
 // and extend them!
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
-    bgColor : string;
-    textColor : string;
-    accentColor : string;
+    bgColor: string;
+    textColor: string;
+    accentColor: string;
   }
 }

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import styled , { createGlobalStyle, keyframes } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Circle from "./Circle";
 import Router from "./Router";
 
 const StyledDiv = styled.div`
-  background-color: ${props => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const H1 = styled.h1`
-  color : ${props => props.theme.textColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -68,27 +68,25 @@ table {
 
 body{
   font-family: 'Dancing Script', cursive;
-  background-color: ${props => props.theme.bgColor};
-  color: ${props => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 }
 
 a{
   text-decoration: none;
+  color:inherit;
 }
 
 
 `;
 
-
-function App(){
-
+function App() {
   return (
     <>
-      <GlobalStyle/><Router />
+      <GlobalStyle />
+      <Router />
     </>
-    
   );
 }
 
 export default App;
-
