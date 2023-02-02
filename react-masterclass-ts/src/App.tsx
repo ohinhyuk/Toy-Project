@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Circle from "./Circle";
 import Router from "./Router";
-
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from "react-query-devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
 const StyledDiv = styled.div`
   background-color: ${(props) => props.theme.bgColor};
 `;
