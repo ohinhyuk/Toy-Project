@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import styled, { createGlobalStyle, keyframes } from "styled-components";
+import styled, {
+  createGlobalStyle,
+  keyframes,
+  ThemeProvider,
+} from "styled-components";
 import Circle from "./Circle";
 import Router from "./Router";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactQueryDevtools } from "react-query-devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { HelmetProvider } from "react-helmet-async";
+import { darkTheme, lightTheme } from "./theme";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isDarkAtom } from "./Atoms";
+// import { HelmetProvider } from "react-helmet-async";
 const StyledDiv = styled.div`
   background-color: ${(props) => props.theme.bgColor};
 `;
@@ -83,10 +92,19 @@ a{
 `;
 
 function App() {
+  // const [isDark, setIsDark] = useState(false);
+  const isDark = useRecoilValue(isDarkAtom);
+  // const onClick = () => setIsDark((curr) => !curr);
+
   return (
     <>
-      <GlobalStyle />
-      <Router />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        {/* <button>Change Theme</button> */}
+        <HelmetProvider>
+          <GlobalStyle />
+          <Router />
+        </HelmetProvider>
+      </ThemeProvider>
     </>
   );
 }

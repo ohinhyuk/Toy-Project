@@ -90,7 +90,7 @@ function Coins() {
         <Loading>loading...</Loading>
       ) : (
         <Coinlist>
-          {data?.slice(0, 100).map((coin) => (
+          {data?.slice(0, 30).map((coin) => (
             <Coin key={coin.id}>
               <Link
                 to={`/${coin.name}`}

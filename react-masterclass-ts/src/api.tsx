@@ -15,3 +15,9 @@ export function priceFetcher(coinId: string) {
     response.json()
   );
 }
+
+export function ohlFetcher(coinId: string) {
+  return fetch(
+    `https://ohlcv-api.nomadcoders.workers.dev?coinId=btc-bitcoin`
+  ).then((res) => res.json());
+}

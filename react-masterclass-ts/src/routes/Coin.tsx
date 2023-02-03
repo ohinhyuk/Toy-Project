@@ -9,8 +9,10 @@ import {
   useMatch,
   useParams,
 } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { infoFetcher, priceFetcher } from "../api";
+import { isDarkAtom } from "../Atoms";
 import Info from "./Info";
 import Price from "./Price";
 
@@ -196,10 +198,14 @@ function Coin() {
   const matchInfo = useMatch(`${coinId}/info`);
   const matchPrice = useMatch(`${coinId}/price`);
 
+  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
+  const onClick = () => setIsDarkAtom((prev) => !prev);
+
   return (
     <Container>
       <Header>
         <Title>Coin : {state?.name || "loading..."}</Title>
+        <button onClick={onClick}>change mode</button>
       </Header>
 
       {loading ? (
@@ -243,7 +249,7 @@ function Coin() {
         </Tab>
       </Tabs>
 
-      <Outlet />
+      <Outlet context={{ coinId }} />
     </Container>
   );
 }
