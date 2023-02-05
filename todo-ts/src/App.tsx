@@ -1,7 +1,14 @@
-import styled, { createGlobalStyle } from "styled-components";
 import React from "react";
-import ToDoList from "./ToDoList";
-
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { useRecoilState } from "recoil";
+import styled, { createGlobalStyle } from "styled-components";
+import { getModeForUsageLocation } from "typescript";
+import { toDoState } from "./atoms";
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -49,7 +56,7 @@ table {
 
 body{
   background-color: ${(props) => props.theme.bgColor};
-  color : ${(props) => props.theme.textColor};
+  color : black;
 }
 
 a{
@@ -59,11 +66,80 @@ a{
 
 `;
 
+const Wrapper = styled.div`
+  border: 1px solid black;
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+const Boards = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(1, 1fr);
+`;
+
+const Board = styled.div`
+  padding: 20px 10px;
+  padding-top: 30px;
+  background-color: ${(props) => props.theme.boardColor};
+  border-radius: 5px;
+  min-height: 200px;
+`;
+
+const Card = styled.div`
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px 10px;
+  background-color: ${(props) => props.theme.cardColor};
+`;
+
 function App() {
+  const [toDos, setToDos] = useRecoilState(toDoState);
+  const onDragEnd = ({ destination, source, draggableId }: DropResult) => {
+    if (!destination) return;
+    setToDos((oldToDos) => {
+      const toDosCopy = [...oldToDos];
+
+      toDosCopy.splice(source.index, 1);
+      console.log(destination.index);
+      toDosCopy.splice(destination?.index, 0, draggableId);
+      console.log(destination.index);
+      return toDosCopy;
+    });
+  };
   return (
     <>
       <GlobalStyle />
-      <ToDoList />
+
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Wrapper>
+          <Boards>
+            <Droppable droppableId="one">
+              {(magic) => (
+                <Board ref={magic.innerRef} {...magic.droppableProps}>
+                  {toDos.map((todo, index) => (
+                    <Draggable key={todo} draggableId={todo} index={index}>
+                      {(magic) => (
+                        <Card
+                          ref={magic.innerRef}
+                          {...magic.draggableProps}
+                          {...magic.dragHandleProps}
+                        >
+                          {todo}
+                        </Card>
+                      )}
+                    </Draggable>
+                  ))}
+                  {magic.placeholder}
+                </Board>
+              )}
+            </Droppable>
+          </Boards>
+        </Wrapper>
+      </DragDropContext>
     </>
   );
 }
