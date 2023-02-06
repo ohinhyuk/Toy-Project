@@ -9,6 +9,7 @@ import { useRecoilState } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
 import { getModeForUsageLocation } from "typescript";
 import { toDoState } from "./atoms";
+import Board from "./components/Board";
 import BoardComp from "./components/Board";
 import DraggableCard from "./components/DraggableCard";
 const GlobalStyle = createGlobalStyle`
@@ -92,9 +93,10 @@ function App() {
     if (source.droppableId === destination.droppableId) {
       setToDos((oldToDos) => {
         const copyToDos = [...oldToDos[source.droppableId]];
+        const taskObj = copyToDos[source.index];
         console.log(info);
         copyToDos.splice(source.index, 1);
-        copyToDos.splice(destination.index, 0, draggableId);
+        copyToDos.splice(destination.index, 0, taskObj);
 
         return {
           ...oldToDos,
@@ -104,9 +106,11 @@ function App() {
     } else if (source.droppableId !== destination.droppableId) {
       setToDos((oldToDos) => {
         const sourceBoard = [...oldToDos[source.droppableId]];
+        const taskObj = sourceBoard[source.index];
+
         const destinationBoard = [...oldToDos[destination.droppableId]];
         sourceBoard.splice(source.index, 1);
-        destinationBoard.splice(destination.index, 0, draggableId);
+        destinationBoard.splice(destination.index, 0, taskObj);
 
         return {
           ...oldToDos,
@@ -136,11 +140,7 @@ function App() {
         <Wrapper>
           <Boards>
             {Object.keys(toDos).map((boardId) => (
-              <BoardComp
-                key={boardId}
-                boardId={boardId}
-                toDos={toDos[boardId]}
-              />
+              <Board key={boardId} boardId={boardId} toDos={toDos[boardId]} />
             ))}
           </Boards>
         </Wrapper>
