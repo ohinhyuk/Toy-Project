@@ -67,13 +67,9 @@ a{
 `;
 
 const Box = styled(motion.div)`
-  width: 200px;
   height: 200px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 30px;
-  /* display: grid; */
-  /* grid-template-columns: repeat(2, 1fr); */
-  margin-top: 20px;
 `;
 
 const Wrapper = styled(motion.div)`
@@ -81,49 +77,75 @@ const Wrapper = styled(motion.div)`
   background: linear-gradient(135deg, #e09, #d0e);
   width: 100vw;
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
+  /* flex-direction: column; */
+  justify-content: center;
   align-items: center;
 `;
 
-function App() {
-  const [visible, setVisible] = useState(false);
-  const onClick = () => {
-    setVisible((prev) => !prev);
-  };
+const Circle = styled(motion.div)`
+  border-radius: 50%;
+  background-color: blue;
+  width: 70px;
+  height: 70px;
+`;
+const Grid = styled.div`
+  display: grid;
+  width: 50vw;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  div:first-child,
+  div:last-child {
+    grid-column: span 2;
+  }
+`;
 
-  const boxVariant = {
-    initial: {
-      scale: 0,
-      opacity: 0,
-    },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      rotateZ: 360,
-    },
-    exit: {
-      scale: 0,
-    },
-  };
+const Layout = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LayoutVariant = {
+  start: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+  },
+  ani: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  end: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+  },
+};
+
+function App() {
+  const [id, setId] = useState<undefined | string>(undefined);
+  const [isLayouted, setIsLayouted] = useState(false);
 
   return (
     <>
       <GlobalStyle />
       <Wrapper>
+        <Grid>
+          {[0, 1, 2, 3].map((e) => (
+            <Box onClick={() => setId(e + "")} layoutId={e + ""} key={e}></Box>
+          ))}
+        </Grid>
         <AnimatePresence>
-          {visible ? (
-            <Box
-              variants={boxVariant}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            />
+          {id !== undefined ? (
+            <Layout
+              onClick={() => setId(undefined)}
+              variants={LayoutVariant}
+              initial="start"
+              animate="ani"
+              exit="end"
+            >
+              <Box layoutId={id} style={{ width: 400 }}></Box>
+            </Layout>
           ) : null}
         </AnimatePresence>
-        <button style={{ width: "100px", margin: "auto 0" }} onClick={onClick}>
-          Click me!
-        </button>
       </Wrapper>
     </>
   );
