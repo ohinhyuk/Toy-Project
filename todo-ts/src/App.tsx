@@ -1,12 +1,9 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import Header from "./components/Header";
+import Home from "./Routes/Home";
+import Search from "./Routes/Search";
+import Tv from "./Routes/Tv";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -54,99 +51,28 @@ table {
 }
 
 body{
-  color : black;
+  color : ${(props) => props.theme.white.darker};
+  
 }
 
 a{
   text-decoration: none;
   color: inherit;
 }
-
-
-
 `;
-
-const Box = styled(motion.div)`
-  height: 200px;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 30px;
-`;
-
-const Wrapper = styled(motion.div)`
-  height: 100vh;
-  background: linear-gradient(135deg, #e09, #d0e);
-  width: 100vw;
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: center;
-  align-items: center;
-`;
-
-const Circle = styled(motion.div)`
-  border-radius: 50%;
-  background-color: blue;
-  width: 70px;
-  height: 70px;
-`;
-const Grid = styled.div`
-  display: grid;
-  width: 50vw;
-  gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-  div:first-child,
-  div:last-child {
-    grid-column: span 2;
-  }
-`;
-
-const Layout = styled(motion.div)`
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LayoutVariant = {
-  start: {
-    backgroundColor: "rgba(0, 0, 0, 0)",
-  },
-  ani: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  end: {
-    backgroundColor: "rgba(0, 0, 0, 0)",
-  },
-};
 
 function App() {
-  const [id, setId] = useState<undefined | string>(undefined);
-  const [isLayouted, setIsLayouted] = useState(false);
-
   return (
     <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="tv" element={<Tv />}></Route>
+          <Route path="search" element={<Search />}></Route>
+        </Routes>
+      </BrowserRouter>
       <GlobalStyle />
-      <Wrapper>
-        <Grid>
-          {[0, 1, 2, 3].map((e) => (
-            <Box onClick={() => setId(e + "")} layoutId={e + ""} key={e}></Box>
-          ))}
-        </Grid>
-        <AnimatePresence>
-          {id !== undefined ? (
-            <Layout
-              onClick={() => setId(undefined)}
-              variants={LayoutVariant}
-              initial="start"
-              animate="ani"
-              exit="end"
-            >
-              <Box layoutId={id} style={{ width: 400 }}></Box>
-            </Layout>
-          ) : null}
-        </AnimatePresence>
-      </Wrapper>
     </>
   );
 }
