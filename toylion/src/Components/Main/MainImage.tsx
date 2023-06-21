@@ -92,7 +92,7 @@ export default function MainImage() {
               color: "primary.main",
               borderColor: "primary.main",
             }}
-            onClick={() => navigate("/enroll")}
+            onClick={() => navigate("/launch")}
           >
             Start
           </Button>

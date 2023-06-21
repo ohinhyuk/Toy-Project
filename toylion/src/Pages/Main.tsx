@@ -4,10 +4,6 @@ import MainImage from "../Components/Main/MainImage";
 import { useEffect } from "react";
 
 export default function Main() {
-  useEffect(() => {
-    window.scrollTo(0, 90);
-  }, []);
-
   return (
     <Box
       component={motion.div}
