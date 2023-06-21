@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
 import Router from "./Components/Router";
+import ThemeProvider from "./theme";
 function App() {
-  return <Router />;
+  return (
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
+  );
 }
 
 export default App;
