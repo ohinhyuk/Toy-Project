@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
@@ -11,9 +11,12 @@ export default function Header() {
         justifyContent: "space-between",
         paddingX: "40px",
         paddingY: "10px",
+        alignItems: "center",
       }}
     >
-      <Box component={"img"} src="/images/mangja.png" width={70}></Box>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box component={"img"} src="/images/mangja.png" width={50}></Box>
+      </Box>
       <Box>
         <DarkModeToggle />
       </Box>
