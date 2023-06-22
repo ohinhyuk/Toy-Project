@@ -6,12 +6,12 @@ import Detail from "../pages/Detail";
 
 function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
       <Header />
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route path="launch" element={<Launch />}></Route>
-        <Route path={`launch/:id`} element={<Detail />}></Route>
+        <Route path="/launch" element={<Launch />}></Route>
+        <Route path={`/launch/:id`} element={<Detail />}></Route>
       </Routes>
     </BrowserRouter>
   );

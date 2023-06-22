@@ -21,7 +21,7 @@ export default function MainImage() {
         />
         <Box
           component={motion.img}
-          src="./images/mainImage.png"
+          src={process.env.PUBLIC_URL + "/img/mainImage.png"}
           alt="Main Image"
           sx={{ zIndex: 0, objectFit: "cover" }}
           width={"100%"}

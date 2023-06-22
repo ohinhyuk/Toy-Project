@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material";
-import DarkModeToggle from "./DarkModeToggle";
+import { Box } from "@mui/material";
 import HeaderLottie from "./headerLottie";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -27,7 +26,7 @@ export default function Header() {
         <Link to="/">
           <Box
             component={motion.img}
-            src="/images/mangja.png"
+            src={process.env.PUBLIC_URL + "/img/mangja.png"}
             width={50}
             whileHover={{ y: [0, -10, 0, -10, 0] }}
           ></Box>
