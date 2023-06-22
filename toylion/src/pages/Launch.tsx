@@ -8,6 +8,7 @@ interface ILaunch {
   flight_number: number;
   mission_name: string;
   launch_year: string;
+  details: string;
   links: {
     mission_patch: string;
   };
@@ -20,7 +21,12 @@ export default function Launch() {
     getAllLanches().then((res) => setLaunches(res.data));
   }, []);
   return (
-    <Box sx={{ pt: 10 }}>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      sx={{ pt: 10 }}
+    >
       <Typography
         sx={{
           textAlign: "center",
@@ -33,15 +39,9 @@ export default function Launch() {
         Launch List
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <ImageList
-          cols={5}
-          gap={20}
-          component={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <ImageList cols={5} gap={20}>
           {launches.map((launch, index) => (
-            <Link to={`/launch/${index}`}>
+            <Link to={`/launch/${index}`} state={launches[index]}>
               <Grid item key={index}>
                 <Box
                   component={"img"}

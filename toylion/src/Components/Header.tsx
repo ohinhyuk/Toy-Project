@@ -1,8 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import DarkModeToggle from "./DarkModeToggle";
 import HeaderLottie from "./headerLottie";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
+  const [isSpeak, setIsSpeak] = useState(false);
+
   return (
     <Box
       sx={{
@@ -19,13 +24,47 @@ export default function Header() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box component={"img"} src="/images/mangja.png" width={50}></Box>
+        <Link to="/">
+          <Box
+            component={motion.img}
+            src="/images/mangja.png"
+            width={50}
+            whileHover={{ y: [0, -10, 0, -10, 0] }}
+          ></Box>
+        </Link>
       </Box>
 
       <Box>
-        <HeaderLottie />
+        <Box
+          width={50}
+          onMouseOver={() => setIsSpeak(true)}
+          onMouseOut={() => setIsSpeak(false)}
+        >
+          <HeaderLottie />
+        </Box>
+
         {/* <DarkModeToggle /> */}
       </Box>
+      {isSpeak && (
+        <Box
+          sx={{
+            position: "absolute",
+            right: 90,
+            top: 60,
+            border: 1,
+            mr: 0,
+            borderRadius: "15px 0px 15px 15px",
+            width: "150px",
+            height: "50px",
+            backgroundColor: "Background.sidebar",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Hello
+        </Box>
+      )}
     </Box>
   );
 }

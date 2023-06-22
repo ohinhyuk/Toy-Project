@@ -78,6 +78,7 @@ export default function MainImage() {
             component={motion.button}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            color="warning"
             transition={{
               duration: 1,
               delay: 3,
@@ -89,8 +90,6 @@ export default function MainImage() {
               fontSize: "20px",
               px: "30px",
               py: "10px",
-              color: "primary.main",
-              borderColor: "primary.main",
             }}
             onClick={() => navigate("/launch")}
           >
