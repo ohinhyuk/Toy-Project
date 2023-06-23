@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
 import Header from "./Header";
-import Launch from "../pages/Launch";
-import Detail from "../pages/Detail";
+import Main from "Pages/Main";
+import Launch from "Pages/Launch";
+import Detail from "Pages/Detail";
 
 function Router() {
   return (
-    <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
+    <BrowserRouter basename={`${process.env.REACT_APP_BASE_URL}`}>
       <Header />
       <Routes>
         <Route path="/" element={<Main />}></Route>
