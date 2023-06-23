@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Metadata } from "next"
+import { Metadata } from "next";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,8 @@ export default function RootLayout({ children }) {
           <div className="flex items-center justify-between max-w-4xl px-4 py-8 mx-auto space-x-4">
             This is Header
           </div>
+          <Link href="/next">next</Link>
+          <Link href="/about">about</Link>
         </header>
         {children}
         <footer>
