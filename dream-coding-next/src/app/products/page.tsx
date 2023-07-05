@@ -1,20 +1,18 @@
+import { getProducts } from "@/service/products";
 import Link from "next/link";
 
-export default function Products() {
+export default async function Products() {
+  const products = await getProducts();
+
   return (
     <div>
       <ul>
-        <Link href="/products/cloth">
-          <li>cloth</li>
-        </Link>
-        <Link href="/products/sock">
-          <li>sock</li>
-        </Link>
-        <Link href="/products/pants">
-          <li>pants</li>
-        </Link>
+        {products?.map(({ id, name }, index: number) => (
+          <Link key={index} href={`products/${id}`}>
+            <li>{name}</li>
+          </Link>
+        ))}
       </ul>
-      <p>Products</p>
     </div>
   );
 }
