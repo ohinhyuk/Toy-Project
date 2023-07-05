@@ -1,6 +1,8 @@
 import { getProduct, getProducts } from "@/service/products";
 import { Metadata } from "next";
 
+export const revalidate = 20;
+
 type IProp = {
   params: {
     slug: string;
