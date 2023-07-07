@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jpashop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create # 실행될 때 테이블 다 지우고 다시 생성
+    properties:
+      hibernate:
+#        show_sql: true # Hibernate와 jpa가 사용하는 sql이 sysout에 다 나타남
+        format_sql: true
+
+loggin:
+  level:
+    org.hibernate.SQL: debug  # 로깅할 때 sql이 다 나타남
+    org.hibernate.type: trace # 쿼리 파라미터를 보여줌
