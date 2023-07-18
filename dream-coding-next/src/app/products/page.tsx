@@ -1,5 +1,6 @@
 import MeowComponent from "@/components/MeowComponent";
 import { getProducts } from "@/service/products";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Products() {
