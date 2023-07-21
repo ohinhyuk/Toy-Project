@@ -1,6 +1,5 @@
 import MeowComponent from "@/components/MeowComponent";
 import { getProducts } from "@/service/products";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function Products() {
@@ -9,7 +8,7 @@ export default async function Products() {
   return (
     <div>
       <ul>
-        {products?.map(({ id, name }, index: number) => (
+        {products?.map(({ id, name, image }, index: number) => (
           <Link key={index} href={`products/${id}`}>
             <li>{name}</li>
           </Link>

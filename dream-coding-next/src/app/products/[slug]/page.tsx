@@ -1,5 +1,4 @@
 import { getProduct, getProducts } from "@/service/products";
-import { Metadata } from "next";
 import Image from "next/image";
 
 export const revalidate = 20;

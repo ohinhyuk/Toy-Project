@@ -1,8 +1,13 @@
 package jpabook.jpashop.domain.item;
 
 import jakarta.persistence.*;
+import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 // 싱글테이블 전략 , 부모 자식 상속 관계 , 부모클래스에 표시
@@ -21,6 +26,34 @@ public abstract class Item {
     private String name;
     private int price;
     private int stockQuantity;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
+
+    //==비즈니스 로직 ==//
+    // setter 어노테이션 대신 이렇게 핵심 비지니스 메서드를 통해 변경 해야 한다.
+    /**
+     * stock 증가
+     * @param quantity
+     */
+    public void addStock(int quantity){
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock 감소
+     * @param quantity
+     */
+
+    public void removeStock(int quantity){
+        int restStock = this.stockQuantity - quantity;
+
+        if(restStock < 0){
+            throw new NotEnoughStockException("need more stock");
+        }
+
+        this.stockQuantity = restStock;
+    }
 
 
 }
