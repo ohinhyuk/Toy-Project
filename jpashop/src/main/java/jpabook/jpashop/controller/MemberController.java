@@ -47,6 +47,7 @@ public class MemberController {
 
     @GetMapping("/members")
     public String list(Model model){
+        // member 엔티티를 넘기는 것은 api 형식에서는 절대 하면 안됨 . DTO를 만들고 거기에 맞게 넘겨야 함!
         List<Member> members = memberService.findMembers();
         model.addAttribute("members", members);
         return "members/memberList";

@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
 
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     @Transactional
     public void saveItem(Item item){
@@ -24,8 +24,18 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item findOne(Long itemId){
+    public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
+    }
+
+    //변경 감지를 통한 update
+    public void updateItem(Long itemId, String name , int price , int stockQuantity){
+        Item findItem = itemRepository.findOne(itemId);
+        //DTO(data transform object)로 따로 빼도 됨.
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+
     }
 
 }

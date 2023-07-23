@@ -81,6 +81,7 @@ public class Order {
         if(delivery.getStatus() == DeliveryStatus.COMP){
             throw new IllegalStateException("이미 주문 완료된 상품입니다.");
         }
+//        값만 바꿔 주고 따로 EM.UPDATE나 머지를 하지 않았음에도 반영 되는 이유가 변경 감지, dirty checking 때문
         this.setStatus(OrderStatus.CANCEL);
         for(OrderItem orderItem : orderItems){
             orderItem.cancel();
