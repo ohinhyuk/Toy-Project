@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # 실행될 때 테이블 다 지우고 다시 생성
+      ddl-auto: create # 실행될 때 테이블 다 지우고 다시 생성
     properties:
       hibernate:
         show_sql: true # Hibernate와 jpa가 사용하는 sql이 sysout에 다 나타남
