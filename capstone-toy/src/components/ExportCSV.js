@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import FileSaver from "file-saver";
 import { CSVLink } from "react-csv";
 
 const headers = [
@@ -17,6 +18,14 @@ const data = [
  * @brief xlsx 모듈 추출
  */
 const xlsx = require("xlsx");
+
+/**
+ * @brief 기본 설정
+ */
+const excelFileType =
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+const excelFileExtension = ".xlsx";
+const excelFileName = "엑셀파일이름";
 
 /**
  * @breif 가상의 엑셀파일을 생성
@@ -89,11 +98,14 @@ const columns = [
 
 const excelDownload = (columns) => {
   const wb = xlsx.utils.book_new(); // 가상의 엑셀파일 생성
-  const ws = xlsx.utils.json_to_sheet(columns);
-  xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
-  //   xlsx.writeFile(wb, `${state.title}_${Data.now().xlsx}`);
+  const ws = xlsx.utils.json_to_sheet(columns); // 시트 생성
+  xlsx.utils.book_append_sheet(wb, ws, "Sheet1"); // 엑셀파일에 시트 추가
+  //   xlsx.writeFile(wb, "dramatis_personae.xlsx"); // 엑셀파일 생성 후 저장 형식
 
-  xlsx.writeFile(wb, "dramatis_personae.xlsx"); // 엑셀파일 생성 후 저장 형식
+  const excelBuffer = xlsx.write(wb, { bookType: "xlsx", type: "array" }); // 엑셀파일 생성 후 저장 형식
+  const excelFile = new Blob([excelBuffer], { type: excelFileType }); // Blob 형식으로 변환
+
+  FileSaver.saveAs(excelFile, excelFileName + excelFileExtension); // FileSaver 라이브러리를 통해 엑셀파일 저장
 };
 
 export default function ExportCSV() {
