@@ -39,20 +39,45 @@ import { useDropzone } from "react-dropzone";
 import readXlsxFile from "read-excel-file";
 
 const schema = {
-  A: {
-    prop: "fullName",
+  이름: {
+    prop: "name",
     type: String,
   },
-  B: {
-    prop: "yearsOld",
+  학번: {
+    prop: "studentId",
     type: String,
   },
-  C: {
-    prop: "location",
+  점수: {
+    prop: "score",
     type: String,
   },
-  D: {
-    prop: "date",
+  추가설명: {
+    prop: "description",
+    type: String,
+  },
+
+  추가설명2: {
+    prop: "description2",
+    type: String,
+  },
+  학부: {
+    prop: "department",
+    type: String,
+  },
+  전공1: {
+    prop: "major1",
+    type: String,
+  },
+  전공2: {
+    prop: "major2",
+    type: String,
+  },
+  연락처: {
+    prop: "contact",
+    type: String,
+  },
+  이메일: {
+    prop: "email",
     type: String,
   },
 };

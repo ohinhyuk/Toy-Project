@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ExportCSV from "./components/ExportCSV";
 import ImportExcel from "./components/ImportExcel";
 import { Button, TextField } from "@mui/material";
-import { useSearchAPI } from "./components/SearchAPI";
+import { SearchAPI } from "./components/SearchAPI";
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
@@ -11,6 +11,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 function App() {
+  // const [result, setResult] = useState([]);
+
+  const searchUsingWord = async (word) => {
+    console.log(word);
+    const searchResult = await SearchAPI(word);
+    if (searchResult?.items?.length > 3) {
+      setAnswer((prev) => [...prev, ...searchResult?.items.slice(0, 3)]);
+    } else {
+      setAnswer((prev) => [...prev, ...searchResult?.items]);
+    }
+  };
+
   const [text, setText] = useState("");
   const [response, setResponse] = useState([]);
   const [answer, setAnswer] = useState([]);
@@ -47,28 +59,19 @@ function App() {
         // {"role": "user", "content": "15글자 이하로 만들고 다른 말 필요 없이 키워드만 반환해 줘. 그리고 각각 서비스 라는 말을 붙여서 반환 해줘 이런식으로 세 개를 만들어 줘. 다른 말 말고 넘버링 없이 , 로 구분해서 줘"}
         {
           role: "user",
-          content:
-            "글자 수는 15글자 이상 , 30글자 이하로 만들고 다른 말 필요 없이 키워드만 반환해 줘. 넘버링 없이 , 로 구분해서 총 3개 줘",
+          content: "대답 같은 말 하지말고 넘버링 붙여서 3개 반환해 줘.",
         },
       ],
     });
 
-    await setResponse(completion.data.choices[0].message.content.split(",")[0]);
-    var result = await useSearchAPI(
-      completion.data.choices[0].message.content.split(",")[0]
-    );
-    setAnswer((prev) => [...prev, result.items[0]]);
-    // result = await useSearchAPI(response[1]);
-    setAnswer((prev) => [...prev, result.items[1]]);
-    // result = await useSearchAPI(response[2]);
-    setAnswer((prev) => [...prev, result.items[2]]);
+    const chatgptResponse = await completion.data.choices[0].message.content
+      .match(/\d+\.\s(.*?)(?=\n|$)/g)
+      ?.map((match) => match.replace(/^\d+\.\s/, ""));
 
-    // result = await useSearchAPI(response[2]);
-    // setAnswer((prev) => prev + ", " + result.items[2].link);
-
-    console.log(result);
-    console.log(completion.data.choices[0].message);
-    console.log(text);
+    chatgptResponse?.length > 0 &&
+      chatgptResponse?.map((word) => {
+        searchUsingWord(word);
+      });
   };
 
   return (
@@ -83,10 +86,16 @@ function App() {
       />
       <Button onClick={useChatGptApi}>검색</Button>
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        {answer.map((item) => (
+        {answer?.map((item) => (
           <div>
-            <p>{item.title}</p>
-            <a href={item.link}>{item.link}</a>
+            <p>{item?.title}</p>
+            <a href={item?.link}>{item?.link}</a>
+            <img
+              src={item?.pagemap?.metatags[0]["og:image"]}
+              width={200}
+              alt="사진"
+            />
+            <div>{item?.snippet}</div>
           </div>
         ))}
       </div>
