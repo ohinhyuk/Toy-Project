@@ -7,5 +7,5 @@ export const SearchAPI = async (searchWord) => {
   const response = await axios.get(
     `https://customsearch.googleapis.com/customsearch/v1?cx=${process.env.REACT_APP_SEARCH_ENGINE_ID}&q=${searchWord}&key=${process.env.REACT_APP_SEARCH_ENGINE_API_KEY}`
   );
-  return response.datat;
+  return response.data;
 };
