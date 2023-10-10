@@ -134,6 +134,29 @@ const parseGradeInfoFromHtml = (html) => {
   });
 
   console.log(result);
+  excelExport(result);
 
   // console.log(tables); // ['데이터1', '데이터2']
+};
+
+const excelExport = (result) => {
+  const ExcelJS = require("exceljs");
+
+  const workbook = new ExcelJS.Workbook();
+
+  // result 배열을 이용해서 각 테이블을 별도의 시트로 저장합니다.
+  result.forEach((tableData, index) => {
+    const worksheet = workbook.addWorksheet(`Table ${index + 1}`);
+
+    // Add rows using both the direct array approach and by providing an object when the column
+    // has keys. Note: the row object can also define styles.
+    tableData.forEach((row) => {
+      worksheet.addRow(row);
+    });
+  });
+
+  // 엑셀 파일을 저장합니다.
+  workbook.xlsx.writeFile("tables.xlsx").then(() => {
+    console.log("File saved!");
+  });
 };
