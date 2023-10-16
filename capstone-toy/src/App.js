@@ -3,6 +3,10 @@ import ExportCSV from "./components/ExportCSV";
 import ImportExcel from "./components/ImportExcel";
 import { Button, TextField } from "@mui/material";
 import { SearchAPI } from "./components/SearchAPI";
+import ImpactiveAIChatGpt from "./components/ImpactiveAIChatGpt";
+import StableDiffusion from "./components/StableDiffusion";
+import BasicGeneration from "./components/IdeaChatGpt/BasicGeneration";
+import ValueGeneration from "./components/IdeaChatGpt/ValueGeneration";
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
@@ -76,7 +80,7 @@ function App() {
 
   return (
     <div className="App">
-      <ExportCSV />
+      {/* <ExportCSV />
       <ImportExcel />
       <TextField
         value={text}
@@ -85,6 +89,7 @@ function App() {
         placeholder="검색하고자 하시는 서비스를 설명 해주세요."
       />
       <Button onClick={useChatGptApi}>검색</Button>
+      <ImpactiveAIChatGpt />
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         {answer?.map((item) => (
           <div>
@@ -98,7 +103,10 @@ function App() {
             <div>{item?.snippet}</div>
           </div>
         ))}
-      </div>
+      </div> */}
+      <StableDiffusion />
+      <BasicGeneration />
+      <ValueGeneration />
     </div>
   );
 }

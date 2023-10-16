@@ -13,17 +13,44 @@ export default function ImpactiveAIChatGpt() {
   const [beforeChat, setBeforeChat] = useState("");
   const [product, setProduct] = useState("");
 
+  // const parseIdeas = (inputText) => {
+  //   const segments = inputText.split(/-\s*아이디어 명:/);
+  //   const parsedIdeas = segments
+  //     .slice(1)
+  //     .map((segment) => {
+  //       // 첫 번째 세그먼트는 무시
+  //       const match = segment.match(/^([^\n]*)\n/);
+  //       return match && match[1].trim();
+  //     })
+  //     .filter(Boolean); // null 값 제거
+  //   return parsedIdeas;
+  // };
+
   const parseIdeas = (inputText) => {
     const segments = inputText.split(/-\s*아이디어 명:/);
-    const parsedIdeas = segments
-      .slice(1)
-      .map((segment) => {
-        // 첫 번째 세그먼트는 무시
-        const match = segment.match(/^([^\n]*)\n/);
-        return match && match[1].trim();
-      })
-      .filter(Boolean); // null 값 제거
-    return parsedIdeas;
+
+    const parseIdeas = (inputText) => {
+      const segments = inputText.split(/-\s*아이디어 명:/);
+
+      const parsedIdeas = segments
+        .slice(1)
+        .map((segment) => {
+          const ideaNameMatch = segment.match(
+            /^([^\n]*)(?:-\s*아이디어 설명:)?/
+          );
+          const ideaDescMatch = segment.match(/-\s*아이디어 설명:([^\-]*)/);
+
+          if (!ideaNameMatch || !ideaDescMatch) return null;
+
+          const ideaName = ideaNameMatch[1].trim();
+          const ideaDesc = ideaDescMatch[1].trim();
+
+          return `아이디어 명: ${ideaName}\n아이디어 설명: ${ideaDesc}`;
+        })
+        .filter(Boolean); // null 값 제거
+
+      return parsedIdeas;
+    };
   };
 
   const IDEA_TEMPLATE = `
@@ -51,6 +78,15 @@ export default function ImpactiveAIChatGpt() {
     -아이디어 설명:
     `;
 
+  const splitEach5Ideas = (ideas) => {
+    if (ideas.length === 0) return [];
+    const result = [];
+    for (let i = 0; i < ideas.length; i += 5) {
+      result.push(ideas.slice(i, i + 5));
+    }
+    return result;
+  };
+
   const ChatGptApi = async () => {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -59,14 +95,49 @@ export default function ImpactiveAIChatGpt() {
           role: "system",
           content: IDEA_TEMPLATE,
         },
-        {
-          role: "system",
-          content:
-            beforeIdeas.join() +
-            " 여기 나와 있는 아이디어들과 중복 되지 않도록 생성 해줘",
-        },
+        // {
+        //   role: "system",
+        //   content:
+        //     beforeIdeas.join() +
+        //     " 여기 나와 있는 아이디어들과 중복 되지 않도록 생성 해줘",
+        // },
+        // splitEach5Ideas(beforeIdeas).map((fiveIdeas) => {
+        //   return {
+        //     role: "system",
+        //     content:
+        //       fiveIdeas.join() + "\n" + "이것들과도 중복 되지 않도록 생성 해줘",
+        //   };
+        // }
+        // ),
+        ...beforeIdeas.map((fiveIdeas) => {
+          return {
+            role: "system",
+            content:
+              "추가로" + fiveIdeas + "이것들과도 중복 되지 않도록 생성 해줘",
+          };
+        }),
       ],
     });
+    // console.log(
+    //   beforeIdeas
+    //     ?.map((fiveIdeas) => {
+    //       return {
+    //         role: "system",
+    //         content:
+    //           "추가로" + fiveIdeas + "이것들과도 중복 되지 않도록 생성 해줘",
+    //       };
+    //     })
+    //     .map((obj) => obj)
+    // );
+
+    // splitEach5Ideas(beforeChat).map((fiveIdeas) => {
+    //   console.log({
+    //     role: "system",
+    //     content:
+    //       fiveIdeas?.join() + "\n" + "이것들과도 중복 되지 않도록 생성 해줘",
+    //   });
+    // });
+    // console.log(parseIdeas(completion.data.choices[0].message.content));
 
     // console.log("data" + completion.data);
 
@@ -74,21 +145,25 @@ export default function ImpactiveAIChatGpt() {
 
     await setBeforeIdeas((prev) => [
       ...prev,
-      ...parseIdeas(completion.data.choices[0].message.content),
+      completion.data.choices[0].message.content,
     ]);
 
-    setBeforeChat((prev) => prev + completion.data.choices[0].message.content);
-    console.log(beforeIdeas);
-    console.log(beforeChat + completion.data.choices[0].message.content);
-    alert(
-      beforeIdeas.join() +
-        "\n" +
-        "새로 생성되는 아이디어들이 위에 나와 있는 아이디어들과 중복 되지 않도록 생성 해줘"
-    );
+    // setBeforeChat(
+    //   (prev) => prev + parseIdeas(completion.data.choices[0].message.content)
+    // );
+    // console.log(beforeIdeas);
+    // console.log(beforeChat + completion.data.choices[0].message.content);
+    // alert(
+    //   beforeIdeas.join() +
+    //     "\n" +
+    //     "새로 생성되는 아이디어들이 위에 나와 있는 아이디어들과 중복 되지 않도록 생성 해줘"
+    // );
   };
   const handleClick = () => {
     ChatGptApi();
   };
+  console.log(...beforeIdeas);
+
   return (
     <Box
       sx={{
